@@ -1,0 +1,107 @@
+<div class="row match-height">
+    <div class="col-md-12">
+        <div class="card" style="height: 855.5px;">
+            <div class="card-header">
+                <h4 class="card-title" id="basic-layout-round-controls">Update Employee</h4>
+            </div>
+            <div class="card-content collapse show">
+                <div class="card-body">
+
+                    <div class="card-text">
+                        <!-- <p>Vestibulum ac diam sit amet quam vehicula elementum sed 
+                            sit amet dui. Curabitur arcu erat, accumsan id 
+                            imperdiet et, porttitor at sem. Curabitur aliquet quam id dui posuere 
+                            blandit. <code>round</code> to any form
+                            control.</p> -->
+                    </div>
+                 
+
+                    <form  [formGroup]="employeeForm" novalidate class="form" (ngSubmit)="onSubmit()" autocomplete="false">
+                        <!-- <pre>{{this.employeeForm.value | json}}</pre> -->
+                        <!-- <pre>{{displayMessage | json}}</pre> -->
+                        
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" 
+                                [ngClass]="{'is-invalid': displayMessage.firstName}"
+                                class="form-control round "
+                                    placeholder="firstName" name="firstName" formControlName="firstName">
+                                    <div class="invalid-feedback"  *ngIf="displayMessage.firstName">
+                                        <span>{{ displayMessage.firstName }}</span>
+                                    </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" 
+                                [ngClass]="{'is-invalid': displayMessage.lastName}"
+                                class="form-control round"
+                                    placeholder="lastName" name="lastName" formControlName="lastName">
+                                    <div class="invalid-feedback"  *ngIf="displayMessage.lastName">
+                                        <span>{{ displayMessage.lastName }}</span>
+                                    </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" 
+                                [ngClass]="{'is-invalid': displayMessage.email}"
+                                class="form-control round" name="email" placeholder="test@test.com" formControlName="email">
+                                <div class="invalid-feedback"  *ngIf="displayMessage.email">
+                                    <span>{{ displayMessage.email }}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="aboutMe">About Me</label>
+                                <textarea id="aboutMe" rows="5" 
+                                [ngClass]="{'is-invalid': displayMessage.aboutMe}"
+                                name="aboutMe" 
+                                formControlName="aboutMe"
+                                class="form-control round"
+                                    name="aboutMe" placeholder="about Me"></textarea>
+                                <div class="invalid-feedback"  *ngIf="displayMessage.aboutMe">
+                                    <span>{{ displayMessage.aboutMe }}</span>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="alias">Alias</label>
+                                <input type="text" id="alias" 
+                                [ngClass]="{'is-invalid': displayMessage.alias}"
+                                name="alias" 
+                                formControlName="alias"
+                                class="form-control round"
+                                 placeholder="@b_b_User" name="alias">
+                                 <div class="invalid-feedback"  *ngIf="displayMessage.alias">
+                                    <span>{{ displayMessage.alias }}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" class="form-check-input" id="fgStatus"
+                                 name="fgStatus"  formControlName="fgStatus" [value]="true">
+                                <label class="form-check-label" for="fgStatus">Activo</label>
+                            </div>
+                        </div>
+                       
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-warning mr-1" (click)="goToEmployeeList()">
+                              Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary"  [disabled]="employeeForm.invalid">
+                             Update
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-spinner bdColor="rgba(0,0,0,0.63)" size ="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <!-- <p style="color: white" > Espere .. .. . . . </p> -->
+</ngx-spinner>
+
+
