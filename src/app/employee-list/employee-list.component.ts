@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Employee, EmployeePagination, FileDTO } from '../model/employee';
@@ -14,6 +14,9 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class EmployeeListComponent implements OnInit {
 
+    
+  @ViewChild('searchInput', {static: false})  searchInput: ElementRef; 
+ 
   employee:Employee = null;
   status:string = '';
   employessList:Employee[];
@@ -23,6 +26,8 @@ export class EmployeeListComponent implements OnInit {
   totalItems = 0;
   pageSize = 3;
   pageSizes = [3, 6, 9];
+
+  searching:boolean = false;
 
   constructor(private employeeService:EmployeeService,
     private utilService:UtilService,
@@ -52,7 +57,6 @@ export class EmployeeListComponent implements OnInit {
     .subscribe((resp:EmployeePagination) => {
       // console.log(resp);
 
-    
       this.currentPage = resp.currentPage > 0? resp.currentPage+1: resp.currentPage;
       this.employessList = resp.employees;
       this.totalItems= resp.totalItems;
@@ -128,5 +132,54 @@ export class EmployeeListComponent implements OnInit {
     this.currentPage = 0;
     this.getEmployeesPagination(this.currentPage,this.pageSize);
   }
+
+  onKeypressEvent(event: any){
+    console.log(event.target.value);
+
+    let letras =  event.target.value;
+    console.log("letras",letras);
+
+
+    if (letras.length >= 1) {
+
+      this.searching = true;
+
+      this.employeeService.searchEmployee(letras)
+      .subscribe((resp:EmployeePagination) => {
+        console.log("resp",resp);
+        this.currentPage = resp.currentPage > 0? resp.currentPage+1: resp.currentPage;
+        this.employessList = resp.employees;
+        this.totalItems= resp.totalItems;
+
+        if(this.employessList.length >0){
+          this.searching = false;
+        }
+   
+  
+      },(error)=> {
+        console.log("error:",error);
+        this.searching = false;
+      })
+    } else {
+
+ 
+      this.searching = false;
+      this.getEmployeesPagination(this.currentPage,this.pageSize);
+    }
+
+
+
+ }
+
+ onChange(event: any) {
+  console.log("onChange",event.target.value);
+  if(event.target.value.length == 0){
+    this.searchInput.nativeElement.value = ""; 
+    this.searching = false;
+    this.getEmployeesPagination(this.currentPage,this.pageSize);
+  }
+ 
+}
+
 
 }

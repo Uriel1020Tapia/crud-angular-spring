@@ -8,8 +8,7 @@ import { Employee, EmployeePagination, FileDTO } from '../model/employee';
 })
 export class EmployeeService {
 
-  private baseURL ="http://localhost:8080/api/v1/employees"
-  private baseURLReport ="http://localhost:8080/api/v1/report"
+  private baseURL ="http://localhost:8080/api/v1";
 
 
   constructor(private http:HttpClient) { }
@@ -18,26 +17,26 @@ export class EmployeeService {
     return this.http.get<Employee[]>(`${this.baseURL}`);
   }
   getEmployeesListPagination(page:number,size:number):Observable<EmployeePagination>{
-
-    page = page == 0? page:page-1;
-    let url = `http://localhost:8080/api/v1/misEmployees?page=${page}&size=${size}`;
-    console.log(url);
-    
-    return this.http.get<EmployeePagination>(url);
+    page = page == 0? page:page-1;    
+    return this.http.get<EmployeePagination>(`${this.baseURL}/misEmployees?page=${page}&size=${size}`);
   }
   saveEmployee(employee:Employee):Observable<Object>{
-    return this.http.post(`${this.baseURL}`,employee);
+    return this.http.post(`${this.baseURL}/employees`,employee);
   }
   getEmployeeById(id:number):Observable<Employee>{
-    return this.http.get<Employee>(`${this.baseURL}/${id}`);
+    return this.http.get<Employee>(`${this.baseURL}/employees/${id}`);
   }
   updateEmployee(id:number,employee:Employee):Observable<Object>{
-    return this.http.put(`${this.baseURL}/${id}`,employee);
+    return this.http.put(`${this.baseURL}/employees/${id}`,employee);
   }
   deleteEmployee(id:number):Observable<Object>{
-    return this.http.delete(`${this.baseURL}/${id}`)
+    return this.http.delete(`${this.baseURL}/employees/${id}`)
   }
   exportData(format:string):Observable<FileDTO>{
-    return this.http.get<FileDTO>(`${this.baseURLReport}/${format}`);
+    return this.http.get<FileDTO>(`${this.baseURL}/report/${format}`);
+  }
+
+  searchEmployee(query:string){
+    return this.http.get<EmployeePagination>(`${this.baseURL}/misEmployees/search/filter?query=${query}`);
   }
 }
