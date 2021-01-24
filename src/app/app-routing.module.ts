@@ -17,8 +17,16 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () =>
-          import('@modules/user/user.module').then( (m) => m.UserModule)
+        loadChildren: () => import('@modules/user/user.module').then(m => m.UserModule)
+      }
+    ],
+  },
+  {
+    path:'calendar',
+    children:[
+      {
+        path:'',
+        loadChildren: () => import('@modules/calendar/calendar.module').then(m => m.CalendarModule)
       }
     ]
   },

@@ -7,6 +7,8 @@ import * as fromComponents from './components';
 import { NgxPaginationModule } from 'ngx-pagination'; 
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
+import { DropDownListModule} from '@syncfusion/ej2-angular-dropdowns';
 
 @NgModule({
   declarations: [...fromComponents.components],
@@ -18,6 +20,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgxPaginationModule,
     NgxSpinnerModule,
     NgbModule,
+    CalendarModule,
+    DropDownListModule
   ],
   exports:[
     CommonModule,
@@ -27,6 +31,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgxPaginationModule,
     NgxSpinnerModule,
     NgbModule,
+    CalendarModule ,
     ...fromComponents.components
   ]
 })

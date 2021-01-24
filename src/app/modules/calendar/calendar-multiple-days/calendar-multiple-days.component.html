@@ -1,0 +1,46 @@
+<p>calendar-multiple-days works!</p>
+
+<div class="d-flex flex-wrap bd-highlight">
+    <!-- <div class="p-2 flex-fill bd-highlight">
+        <ejs-calendar></ejs-calendar>
+    </div>
+    <div class="p-2 flex-fill bd-highlight">
+        <ejs-calendar [value]='dateValue' [min]='minDate' [max]='maxDate'></ejs-calendar>
+    </div>-->
+    <div class="p-2 flex-fill bd-highlight">
+        <p>Fechas seleccionadas</p>
+        <pre>{{dateValues | json}}</pre>
+        <ejs-calendar [values]='dateValues2' [isMultiSelection]='multiSelect'></ejs-calendar>
+    </div>
+    <!-- <div class="p-2 flex-fill bd-highlight">
+        <ejs-calendar [showTodayButton]='false' [value]='dateValue' [dayHeaderFormat]='Wide' [weekNumber]='true'
+            [name]="Test"></ejs-calendar>
+    </div>  -->
+    <!-- <div class="p-2 flex-fill bd-highlight">
+        <ejs-calendar [value]='dateValueLocale'></ejs-calendar>
+    </div> -->
+    <div class="p-2 flex-fill bd-highlight">
+
+        <div class="wrapelement">
+            <ejs-calendar #ejCalendar id="calendar"  [isMultiSelection]='multiSelect' (change)="onChange($event)"></ejs-calendar>
+        </div>
+         <!--
+        <div class='btncontainer e-btn-group e-vertical'>
+            <input type="radio" id="workweek" name="week" value="workweek" (click)="workWeek()" />
+            <label class="e-btn" for="workweek">Work Week</label>
+            <input type="radio" id="week" name="week" value="week" (click)="week()" />
+            <label class="e-btn" for="week">Week</label>
+        </div>
+    </div> -->
+
+    <!-- <div class="p-2 flex-fill bd-highlight">
+        <ejs-calendar [value]='dateValue' [firstDayOfWeek]='startWeek'></ejs-calendar>
+    </div>
+
+    <!-- <div class="p-2 flex-fill bd-highlight">
+        <ejs-calendar id="calendar" (change)='onChange2($event)'></ejs-calendar>
+
+    </div>  -->
+
+    <button class="btn btn-primary" (click)="submit()">Enviar</button>
+</div>
