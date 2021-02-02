@@ -1,0 +1,17 @@
+<div class="card mx-30" *ngIf="data">
+  <img src="{{data.avatar}}" class="card-img-top" alt="{{data.avatar}}">
+  <div class="card-body">
+      <h5 class="card-title">
+        {{data.name}} <small>Edad: {{data.age}}</small></h5>
+      <a routerLink="/panel/user/detail/{{data.id}}">
+        {{data.work}}</a>
+      <p class="card-text">
+        {{data.description}}.</p>
+      <div class="socials">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-dribbble"></i></a>
+      </div>
+  </div>
+</div>

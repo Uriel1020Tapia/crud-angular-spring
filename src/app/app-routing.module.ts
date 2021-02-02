@@ -10,14 +10,23 @@ import { UpdateEmployeeComponent } from './update-employee/update-employee.compo
 
 
 const routes: Routes = [
-
   {
     path: '',
+    redirectTo: '/panel/user',
+    pathMatch: 'full'
+  },
+  {
+    path: 'panel',
     component: SkeletonComponent,
     children: [
       {
-        path: '',
-        loadChildren: () => import('@modules/user/user.module').then(m => m.UserModule)
+        path: 'user',
+        loadChildren: () => import('@modules/user/user.module').then( (m) => m.UserModule)
+      },
+      {
+        path: '**',
+        redirectTo: '/panel/user',
+        pathMatch: 'full'
       }
     ],
   },
@@ -26,7 +35,7 @@ const routes: Routes = [
     children:[
       {
         path:'',
-        loadChildren: () => import('@modules/calendar/calendar.module').then(m => m.CalendarModule)
+        loadChildren: () => import('@modules/calendar/calendar.module').then((m) => m.CalendarModule)
       }
     ]
   },
@@ -36,7 +45,11 @@ const routes: Routes = [
   {path:'create-employee',component:CreateEmployeeComponent, canActivate:[EmployeesGuard]},
   {path:'update-employee/:id',component:UpdateEmployeeComponent, canActivate:[EmployeesGuard]},
   {path:'detail-employee',component:EmployeeListComponent, canActivate:[EmployeesGuard]},
-  {path:'**', redirectTo:'', pathMatch:'full'}
+  {
+    path: '**',
+    redirectTo: '/panel/user',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

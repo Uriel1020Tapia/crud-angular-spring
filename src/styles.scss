@@ -10,3 +10,26 @@
 @import '../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
 @import '../node_modules/@syncfusion/ej2-calendars/styles/material.css';
 @import '../node_modules/@syncfusion/ej2-angular-calendars/styles/material.css';
+
+// .p-datepicker .p-datepicker-header  {
+//     display: none !important;
+// }}
+
+.container ::ng-deep p-calendar .ui-datepicker table td {
+    padding: 1px !important;
+  }
+  .container ::ng-deep p-calendar .ui-datepicker .ui-timepicker {
+    padding: 2px 0 0 0 !important;
+  }
+  .container ::ng-deep p-calendar .ui-datepicker {
+    padding: 0.857em 0.857em 0 0.857em !important;
+  }
+
+  .p-datepicker table td > span.p-highlight {
+    color: #fefeff !important;
+    background: #ab004f !important;
+}
+.p-datepicker table td > span {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+}

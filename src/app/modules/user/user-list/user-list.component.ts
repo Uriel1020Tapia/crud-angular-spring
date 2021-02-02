@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { CAROUSEL_DATA_ITEMS } from '@data/constants/carousel.const';
+// import { USERS_DATA } from '@data/constants/user.const';
+import { UserService } from '@data/services/api/user.service';
+import { ICardUser } from '@shared/components/cards/card-user/card-user.metadata';
+import { ICarouselItem } from '@shared/components/carousel/Icarousel-item.metadata';
 
 @Component({
   selector: 'app-user-list',
@@ -7,8 +12,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserListComponent implements OnInit {
 
-   textTitle ='Lista de usuarios!'
-  constructor() { }
+   textTitle ='List users';
+   public users:ICardUser[]; //= USERS_DATA;
+   public carouselData: ICarouselItem[] = CAROUSEL_DATA_ITEMS;
+
+  constructor( private userService:UserService) {
+    this.userService.getAllUsers().subscribe( r => {
+      if(!r.error){
+        this.users = r.data;
+      }
+    })
+  }
 
   ngOnInit(): void {
   }
