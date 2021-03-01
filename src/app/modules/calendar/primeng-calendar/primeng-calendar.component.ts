@@ -18,17 +18,17 @@ export class PrimengCalendarComponent implements OnInit {
 
   defaultDate: Date = new Date('1/18/2021');
 
-  
+
   dates: Date[] = [new Date('1/1/2021'), new Date('1/15/2021'), new Date('1/3/2021'), new Date('1/25/2021')];
 
   rangeDates: Date[];
   date14: Date[];
   minDate: Date;
-  
+
   maxDate: Date;
-  
+
   invalidDates: Array<Date>;
-  
+
   es: any;
   timeValue: string;
 
@@ -37,9 +37,18 @@ export class PrimengCalendarComponent implements OnInit {
 //###############################################################
 //################### PRUEBAS ##########################
 //###############################################################
+
+
+/* ========================================================================
+================================ form de busqueda=========================
+===========================================================================*/
+
 searchForm: FormGroup;
-calendarForm: FormGroup;
 listNextYears:number[] = [];
+
+
+
+calendarForm: FormGroup;
 
 // lista dias inhabiles por mes
 // ENERO
@@ -69,7 +78,7 @@ showCardCalendar: boolean = false;
 
 
 // Inject PrimeNgConfig
-constructor(   
+constructor(
   private fb: FormBuilder,
   private calendarService:CalendarService,
   private primeNGConfig: PrimeNGConfig,
@@ -80,16 +89,6 @@ constructor(
 }
 
   ngOnInit(): void {
-    // this.es = {
-    //   firstDayOfWeek: 1,
-    //   dayNames: [ "domingo","lunes","martes","miércoles","jueves","viernes","sábado" ],
-    //   dayNamesShort: [ "dom","lun","mar","mié","jue","vie","sáb" ],
-    //   dayNamesMin: [ "D","L","M","X","J","V","S" ],
-    //   monthNames: [ "enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre" ],
-    //   monthNamesShort: [ "ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic" ],
-    //     today: 'Hoy',
-    //     clear: 'Borrar'
-    // };
     this.primeNGConfig.setTranslation(
       {
         // firstDayOfWeek: ['1',''],
@@ -102,56 +101,9 @@ constructor(
         clear: 'Limpiar',
       }
     );
-    
-    let today = new Date();
-    let month = today.getMonth();
-    let year = today.getFullYear();
-    let prevMonth = (month === 0) ? 11 : month -1;
-    let prevYear = (prevMonth === 11) ? year - 1 : year;
-    let nextMonth = (month === 11) ? 0 : month + 1;
-    let nextYear = (nextMonth === 0) ? year + 1 : year;
-    this.minDate = new Date();
-    this.minDate.setMonth(prevMonth);
-    this.minDate.setFullYear(prevYear);
-    this.maxDate = new Date();
-    this.maxDate.setMonth(nextMonth);
-    this.maxDate.setFullYear(nextYear);
-
-
-
-    // let todayCustom = new Date();
-    // let monthCustom  = todayCustom.getMonth();
-    // this.maxDate = new Date();
-    // this.maxDate.setMonth(monthCustom);
-
-    // let todayMin= new Date();
-    // let monthMinCustom  = todayMin.getMonth();
-    // this.minDate = new Date();
-    // this.minDate.setMonth(monthMinCustom);
-
-
-    console.log("today",today);
-    console.log("month",month);
-    console.log("year",year);
-    console.log("prevMonth",prevMonth);
-    console.log("prevYear",prevYear);
-    console.log("nextMonth",nextMonth);
-    console.log("nextYear",nextYear);
-
-    
-    // this.minDate = new Date();
-    // this.minDate.setMonth(prevMonth);
-    // this.minDate.setFullYear(prevYear);
-    // this.maxDate = new Date();
-    // this.maxDate.setMonth(nextMonth);
-    // this.maxDate.setFullYear(nextYear);
-    
-    let invalidDate = new Date();
-    invalidDate.setDate(today.getDate() - 1);
-    this.invalidDates = [today,invalidDate];
   }
 
-  //Inicializar formulario 
+  //Inicializar formulario
   inizialiteForm(){
       this.searchForm = this.fb.group({
         year: [this.getYearCurrent(), [Validators.required, Validators.minLength(4),Validators.maxLength(25)]]
@@ -160,10 +112,8 @@ constructor(
       this.calendarForm = this.fb.group({
         listFebruary: this.datesFebruary
       });
-      
 
-      this.getFollowingYearsFromThePresent();
-      this.getFollowingYearsFromThePresentMoment();
+      this.loadYears();
   }
 
   getYearCurrent(){
@@ -172,68 +122,29 @@ constructor(
   getMonthCurrent(){
     return new Date().getMonth();
   }
-  //Obtener años siguientes apartir del actual
-  getFollowingYearsFromThePresent(){
-
-    const format = 'MM-DD-YYYY'
-    const hoy = moment();
-    const ayer = hoy.clone().subtract(1,'days');
-    const manana = hoy.clone().add(1,'days');
-    const fechaExacta = moment(hoy.format(format));
-    const fechaExacta2 = moment([2021,0]);
-
-    const mesDias = moment([2021,1]).daysInMonth()
-
-    console.table({
-      hoy1:hoy.toDate(),
-      hoy: hoy.format(format),
-      ayer:ayer.format(format),
-      manana:manana.format(format),
-      fechaExacta:fechaExacta.format(format),
-      fechaExacta2:fechaExacta2.format(format),
-      mesDias:mesDias,
-      mayor: (hoy > ayer) ? true:false,
-      momentdate:moment().date()
-    });
 
 
-
-    // var listNextYears=[];
-    // let currentYear = new Date().getFullYear();
-    // let next_Year = new Date();
-    // console.log("Anio actual",currentYear);
-
-    // for(let i= 0; i <= 3; i++){
-    //   next_Year.setFullYear(currentYear + i);
-    //   listNextYears.push(next_Year.getFullYear());
-    //   // this.listNextYears.push(next_Year.getFullYear());
-    // }
-
-    // console.log("listNextYears",listNextYears)
-  }
-
-  getFollowingYearsFromThePresentMoment(){
-    let  listNextYears=[];
+  loadYears(){
     const currentDate = moment();
-    let next_Year = null;
+    let years = null;
 
-    for(let i= 0; i <= 3; i++){
-      next_Year =  currentDate.clone().add(i,'years');
-      listNextYears.push(next_Year.year());
-      this.listNextYears.push(next_Year.year());
+    let getYearPrevius =  currentDate.clone().subtract(1,'years');
+
+    this.listNextYears.push(getYearPrevius.year());
+
+    for(let i= 0; i <= 4; i++){
+
+      years =  currentDate.clone().add(i,'years');
+      this.listNextYears.push(years.year());
     }
-    console.log("listNextYears moment",listNextYears);
-    
+    console.log("listNextYears moment",this.listNextYears);
+
   }
 
 
   onChangeYear($event){
-    console.log("evento",$event.target.value);
-
-    
-
-
-    this.showCalendar(parseInt(this.f.year.value));
+    console.log("request ==>",$event.target.value);
+    this.buildCalendar(+this.f.year.value);
 
   }
 
@@ -244,62 +155,90 @@ constructor(
       }
 
       console.info('request ==>!' , this.searchForm.value);
-
-
   }
 
-  showCalendar(year){
+  buildCalendar(year:number){
     this.spinner.show();
-    let listaDiasInhabilesApi =[];
-
     console.log("Año recibido",year);
 
-    if(year === 2022){
-      
-      console.log("--- anio 2022 selected---");
-      this.datesJunuary =[];
-      this.datesFebruary =[];
-      this.calendarService.getlistDaysDisabled().subscribe(resp => {
- 
-        console.log("resp service",resp);
+    let listDaysNotWorking =[];
 
-        listaDiasInhabilesApi = resp;
-        for(let i=0; i < listaDiasInhabilesApi.length; i++){
-          let mes = parseInt(listaDiasInhabilesApi[i].split('/')[0]);
-          let dia = parseInt(listaDiasInhabilesApi[i].split('/')[1]);
-          let anio = parseInt(listaDiasInhabilesApi[i].split('/')[2]);
-    
-          console.log("dia",dia);
-          console.log("mes",mes);
-          console.log("anio",anio);
-    
-          
-          switch (mes){
-            case 1:
-              let dateEne = `${mes}/${dia}/${anio}`
-              this.datesJunuary = this.datesJunuary.concat(new Date(dateEne));
-              break;
-            case 2:
-              let dateFeb = `${mes}/${dia}/${anio}`
-              this.datesFebruary =this.datesFebruary.concat(new Date(dateFeb));
-              break;
-          }
-          console.log("datesJunuary",i,this.datesJunuary);
-          
-        }
-        this.spinner.hide();
-        this.showCardCalendar = true;
-      })
+    this.calendarService.getlistDaysDisabled(year).subscribe(data => {
+
+      console.log(`Días inhabiles del año ${year} ${data}`);
+
+      listDaysNotWorking = data;
+
+      this.separateDates(listDaysNotWorking);
+
+    });
+  }
+
+  separateDates(listDaysNotWorking:string[]){
+
+    this.datesJunuary =[];
+    this.datesFebruary =[];
+    this.datesMarch = [];
+    this.datesApril  =[];
+    this.datesMay = [];
+    this.datesJune =[];
+
+    for(let i=0; i < listDaysNotWorking.length; i++){
+
+            let mes = parseInt(listDaysNotWorking[i].split('/')[0]);
+            let dia = parseInt(listDaysNotWorking[i].split('/')[1]);
+            let anio = parseInt(listDaysNotWorking[i].split('/')[2]);
+
+            // console.log("dia ==>",dia);
+            // console.log("mes ==>",mes);
+            // console.log("anio  ==>",anio);
 
 
-      
 
-    }else{
-      console.log("anio 2021");
+            switch (mes){
+              case 1:
+               console.log(moment().month(mes).format("MMMM"));
+                // this.datesJunuary = this.datesJunuary.concat(new Date(`${mes}/${dia}/${anio}`));
+                let dateConverter =new Date(`${mes}/${dia}/${anio}`);
+                console.log("dateConverter",dateConverter);
+
+                this.datesJunuary.push(dateConverter);
+
+                break;
+              case 2:
+
+                // this.datesFebruary =this.datesFebruary.concat(new Date(`${mes}/${dia}/${anio}`));
+                let dateConverter2 =new Date(`${mes}/${dia}/${anio}`);
+                console.log("dateConverter2",dateConverter2);
+                this.datesFebruary.push(dateConverter2);
+                break;
+              case 3:
+
+                // this.datesMarch =this.datesMarch.concat(new Date(`${mes}/${dia}/${anio}`));
+                this.datesMarch.push(new Date(`${mes}/${dia}/${anio}`));
+                break;
+              case 4:
+                // this.datesApril =this.datesApril.concat(new Date(`${mes}/${dia}/${anio}`));
+                this.datesApril.push(new Date(`${mes}/${dia}/${anio}`));
+                break;
+              case 5:
+
+                this.datesMay =this.datesMay.concat(new Date(`${mes}/${dia}/${anio}`));
+                break;
+              case 6:
+                this.datesJune =this.datesJune.concat(new Date(`${mes}/${dia}/${anio}`));
+                break;
+            }
+      }
+
+      console.log(this.datesJunuary)
+      console.log(this.datesFebruary)
+      console.log(this.datesMarch)
+      console.log(this.datesApril)
+      console.log(this.datesMay)
+      console.log(this.datesJune)
+      this.showCardCalendar =  true;
       this.spinner.hide();
-    }
-   
-
   }
 
   get f(){
@@ -361,7 +300,7 @@ constructor(
     for(let i=0; i <= 11; i++){
       fechaExactaInicio = moment([dateSelected.year,i]);
       fechaExactaFin = moment([dateSelected.year,i]);
-       
+
       console.log("fechaExactaInicio",fechaExactaInicio);
       console.log("fechaExactaFin",fechaExactaFin);
 
@@ -373,9 +312,9 @@ constructor(
 
 
     }
-    
 
-    
+
+
   }
 
   getMinMaxDateByMonth(starOfMonth,endOfMonth){

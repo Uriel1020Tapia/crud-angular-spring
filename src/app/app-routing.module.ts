@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { SkeletonComponent } from '@layout/skeleton/skeleton.component';
+import { Page404Component } from '@modules/server/page404/page404.component';
 import { CreateEmployeeComponent } from './create-employee/create-employee.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeesGuard } from './guards/employees.guard';
@@ -16,12 +17,20 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path:'404',
+    component:Page404Component
+  },
+  {
     path: 'panel',
     component: SkeletonComponent,
     children: [
       {
         path: 'user',
         loadChildren: () => import('@modules/user/user.module').then( (m) => m.UserModule)
+      },
+      {
+        path:'pdfs',
+        loadChildren: () => import('@modules/pdfs/pdfs.module').then((m) => m.PdfsModule)
       },
       {
         path: '**',
@@ -39,7 +48,8 @@ const routes: Routes = [
       }
     ]
   },
-  
+
+
   {path: 'login', component: LoginComponent},
   {path:'employees',component:EmployeeListComponent, canActivate:[EmployeesGuard]},
   {path:'create-employee',component:CreateEmployeeComponent, canActivate:[EmployeesGuard]},

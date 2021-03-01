@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiClass } from '@data/schema/ApiClass.class';
 import { ICardUser } from '@shared/components/cards/card-user/card-user.metadata';
 import { Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, delay, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,7 @@ getAllUsers(): Observable<{
   const response ={ error:false, msg:'', data:null};//Esto es lo que respondemos depende la repuesta de tu API
   return this.http.get<ICardUser[]>(`${this.url}/users`)
   .pipe(
+    delay(3000),
     map( r => {
       response.data = r; //manipulamos la respuesta para convertirla en el objeto que se requiere regresar
       return response;

@@ -26,6 +26,8 @@ import { SkeletonComponent } from './layout/skeleton/skeleton.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { Page404Component } from './modules/server/page404/page404.component';
 
 
 @NgModule({
@@ -35,13 +37,15 @@ import { NavigationComponent } from './layout/navigation/navigation.component';
     HeaderComponent,
     FooterComponent,
 
-    
+
     EmployeeListComponent,
     CreateEmployeeComponent,
     UpdateEmployeeComponent,
     HomeComponent,
     LoginComponent,
-    NavigationComponent
+    NavigationComponent,
+    SidebarComponent,
+    Page404Component
   ],
   imports: [
 
@@ -76,7 +80,7 @@ import { NavigationComponent } from './layout/navigation/navigation.component';
         ]
       } as SocialAuthServiceConfig,
     },
-    authInterceptorProviders 
+    authInterceptorProviders
   ],
   bootstrap: [AppComponent]
 })
@@ -86,12 +90,12 @@ export class AppModule { }
 //core todo lo que se debe cargar desde le inicio
 //data poner las constantes por ejemplo titulo del home de las paginas
 //interfaces para que ciertos ddatos cumplan con ciertas caracteristicas
-//mocks para datos dummy sino tienes un api funcional 
-//schema para tener clases 
-//services 
+//mocks para datos dummy sino tienes un api funcional
+//schema para tener clases
+//services
 
 
-//layout van los componentes html bases de la app navigation footer header 
+//layout van los componentes html bases de la app navigation footer header
 //modules van los modules como login register password ,modulos del negocio,modulo dashboarh favoritos etc
 // shared van los componentes compartidos
 //services van los services compartidos ejemplo un servicio que muestre un spinner o un modal de alerta
@@ -99,6 +103,9 @@ export class AppModule { }
 
 //configurar el archivo tsconfig.json
 //para poner los alias a las rutas
+
+// cambiar tambien el baseUrl agregarle el src
+// "baseUrl": "./src",
 // "paths": {
 //   "@core/*":["app/core/*"],
 //   "@shared/*":["app/shared/*"],

@@ -16,6 +16,9 @@ export class UserListComponent implements OnInit {
    public users:ICardUser[]; //= USERS_DATA;
    public carouselData: ICarouselItem[] = CAROUSEL_DATA_ITEMS;
 
+   public model = null;
+   public model2 = null;
+
   constructor( private userService:UserService) {
     this.userService.getAllUsers().subscribe( r => {
       if(!r.error){
@@ -27,4 +30,9 @@ export class UserListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  upload(){
+    console.log(this.model);
+    console.log(this.model2);
+
+  }
 }

@@ -13,7 +13,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [...fromComponents.components, ],
+  declarations: [...fromComponents.components,  ],
   imports: [
     CommonModule,
     FormsModule,
