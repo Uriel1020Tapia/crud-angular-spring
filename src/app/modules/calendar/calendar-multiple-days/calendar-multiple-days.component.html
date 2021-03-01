@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <pre>{{date | json}}</pre>
+      <div class="card" >
+          <div class="card-header">
+              <h5>{{nameMonth}} {{yearSelected}}</h5>
+          </div>
+          <div class="card-body">
+                  <p-calendar
+                  [(ngModel)]="date"
+                  name="{{nameMonth}}"
+                  selectionMode="multiple"
+                  [readonlyInput]="true"
+                  inputId="{{nameMonth}}"
+                  [inline]="true"
+                  [showButtonBar]="false"
+                  [showTransitionOptions]="'0ms'"
+                  [hideTransitionOptions]="'0ms'"
+                  [disabledDays]="[0,6]"
+                  [showOtherMonths]="false"
+                  [selectOtherMonths]="false"
+                  [minDate]="minDate"
+                  [maxDate]="maxDate"
+                  ></p-calendar>
+          </div>
+        </div>
+  </div>
+  <!-- <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+      <div class="card" *ngIf="showCardCalendar">
+          <div class="card-header">
+              <h5>Febrero</h5>
+
+              <pre>{{datesFebruary | json}}</pre>
+          </div>
+          <div class="card-body">
+                  <p-calendar
+                  [(ngModel)]="datesFebruary"
+                  name="february"
+                  selectionMode="multiple"
+                  [readonlyInput]="true"
+                  inputId="multiple2"
+                  [inline]="true"
+                  [showButtonBar]="false"
+                  [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'"
+                  [locale]="es"
+                  [disabledDays]="[0,6]"
+                  [showOtherMonths]="false"
+                  [selectOtherMonths]="false"
+                  ></p-calendar>
+          </div>
+          <div class="card-footer">
+          </div>
+        </div>
+  </div> -->
+
+  <!-- <div class="row">
+      <div class="col-md 12">
+          <button class="btn btn-success" (click)="enviar()" >show days</button>
+      </div>
+  </div> -->
+
+</div>

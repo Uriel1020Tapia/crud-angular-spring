@@ -1,0 +1,52 @@
+<header class="header mb-2">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" routerLink="employees">AngularApp</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" routerLink="home"  routerLinkActive="active">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/create-employee" *ngIf="isLogged">Add Employee</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/employees" *ngIf="isLogged">Employees</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/">isLogged: {{isLogged}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/user-detail">User Deatils</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/calendar">Calendar</a>
+          </li>
+        </ul>
+        <!-- <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form> -->
+          <ul class="navbar-nav ml-auto" *ngIf="isLogged">
+              <li class="nav-item disabled">
+                  <a class="nav-link" >
+                  {{currenUserLogged.username}}
+                </a>
+                </li>
+          </ul>
+
+
+          <img *ngIf="isLogged" src="{{currenUserLogged?.imageUrl}}" class="rounded-circle mr-3" style="width: 50px">
+
+         <button class="btn btn-outline-success my-2 my-sm-0" type="submit" routerLink="/login" *ngIf="!isLogged">
+           <i class="fas fa-sign-in-alt fa-lg"></i> Sign In
+        </button>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"  *ngIf="isLogged" (click)="logOut()">
+          <i class="fas fa-sign-in-alt fa-lg"></i> Sign out
+       </button>
+      </div>
+    </nav>
+  </header>

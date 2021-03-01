@@ -1,0 +1,47 @@
+
+.border-md {
+  border-width: 2px;
+}
+
+.btn-facebook {
+  background: #405d9d;
+
+  border: none;
+}
+
+.btn-facebook:hover,
+.btn-facebook:focus {
+  background: #314879;
+}
+
+.btn-google {
+  background: #ea4435c9;
+  border: none;
+}
+
+​ .btn-google:hover,
+ .btn-google:focus {
+  background: #ea4335 !important;
+}
+
+.form-control:not(select) {
+  padding: 1.5rem 0.5rem;
+}
+
+select.form-control {
+  height: 52px;
+
+  padding-left: 0.5rem;
+}
+
+.form-control::placeholder {
+  color: #ccc;
+
+  font-weight: bold;
+
+  font-size: 0.9rem;
+}
+
+.form-control:focus {
+  box-shadow: none;
+}

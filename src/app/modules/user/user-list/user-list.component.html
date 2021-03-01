@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="row bg-dark h-100">
+    <div class="col-12 px-0">
+        <app-carousel [items]="carouselData" [isFullScreen]="false"></app-carousel>
+    </div>
+  </div>
+    <div class="row">
+        <div class="col-12">
+            <app-title-h5 [type]="'secondary'" [text]="textTitle"></app-title-h5>
+        </div>
+        <ng-container *ngIf="users; else elseUsersLoader;">
+          <div class="col-xl-4 col-lg-4 col-md-6" *ngFor="let user of users;">
+              <app-card-user [data]="user" ></app-card-user>
+          </div>
+        </ng-container>
+        <!--------------------------------------------
+          ------------------------------------------
+          ------------- loader----------------------->
+        <ng-template #elseUsersLoader>
+          <div class="col-xl-4 col-lg-4 col-md-6" *ngFor="let user of [0,1,2,3,4];">
+            <app-card-loader [bars]="6" [imageSize]="150"></app-card-loader>
+          </div>
+        </ng-template>
+        <!--------------------------------------------
+          ------------------------------------------
+          ------------- end loader----------------------->
+          <div class="col-md-6">
+            <pre>{{model | json}}</pre>
+            <app-f-dropzone [(model)]="model"
+             [maxSize]="9000000"></app-f-dropzone>
+
+          </div>
+          <div class="col-md-6">
+          <pre>  {{model2 |json}}</pre>
+            <app-f-dropzone [(model)]="model2"
+            [maxSize]="5000000"></app-f-dropzone>
+          </div>
+          <div class="col-md-12">
+              <button class="btn btn-primary" (click)="upload()">
+                <i class="fas fa-cloud-upload-alt"></i> upload
+              </button>
+          </div>
+    </div>
+</div>

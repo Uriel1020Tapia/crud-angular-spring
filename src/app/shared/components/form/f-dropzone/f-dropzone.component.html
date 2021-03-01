@@ -1,0 +1,24 @@
+<div class="dropzone">
+    <div class="dropzone-file">
+        <div class="dropzone-button">
+            <ng-container *ngIf="fileName; else elseButton;">
+              <ng-container *ngIf="previewUrl; else elseFile;">
+                <img  class="dropzone-img" [src]="previewUrl" >
+              </ng-container>
+              <ng-template #elseFile>
+                <i class="fas fa-file ifile"></i>
+              </ng-template>
+              <div class="file-uploaded">
+                <p class="uploaded">{{fileName}}</p>
+                <i class="fas fa-times-circle" (click)="removeFile()"></i>
+              </div>
+            </ng-container>
+            <ng-template #elseButton>
+                <p>Drop files here or click to upload.</p>
+                <label for="file"><i class="fas fa-cloud-upload-alt"></i></label>
+            </ng-template>
+          </div>
+        <input type="file" name="file" id="file" [(ngModel)]="fileDataModel" (change)="updateModel($event)">
+    </div>
+    <small>{{errorMsg}}</small>
+</div>
