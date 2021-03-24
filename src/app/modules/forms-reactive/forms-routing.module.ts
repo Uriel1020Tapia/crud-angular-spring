@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PdfMakerComponent } from './pdf-maker/pdf-maker.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
 
   {
     path: '',
-    component: PdfMakerComponent
+    component: RegisterComponent
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PdfsRoutingModule { }
+export class FormsRoutingModule { }

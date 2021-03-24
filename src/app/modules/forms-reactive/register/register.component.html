@@ -1,0 +1,59 @@
+<div class="row d-flex justify-content-center alig-items-center mt-4">
+    <div class="col-7">
+        <mdb-card>
+            <mdb-card-body>
+              <mdb-card-title>
+                <h4>Registro</h4>
+              </mdb-card-title>
+                <pre>{{registerForm.value | json}}</pre>
+              <!-- Default form login -->
+              <form [formGroup]="registerForm" novalidate class="text-center border border-light p-5" (ngSubmit)="onSave()" >
+              
+                  <!-- <p class="h4 mb-4">Sign in</p> -->
+                
+                  <!-- Email -->
+                  <input type="text" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="" formControlName="text1"
+                  [ngClass]="{'is-invalid': (fm.text1.dirty || fm.text1.touched) && fm.text1.errors}">
+                            
+                    <ng-container *ngIf="(fm.text1.dirty || fm.text1.touched) && fm.text1.errors">
+                    <div class="invalid-feedback">
+                        <span *ngIf="fm.text1.hasError('required')">Contrase&ntilde;a es requerida</span>
+                    </div>
+                    </ng-container>
+                  <!-- Password -->
+                  <input type="text" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="" formControlName="text2"
+                  [ngClass]="{'is-invalid': (fm.text2.dirty || fm.text2.touched) && fm.text2.errors}">
+                  <ng-container *ngIf="(fm.text2.dirty || fm.text2.touched) && fm.text2.errors">
+                    <div class="invalid-feedback">
+                        <span *ngIf="fm.text2.hasError('required')">Contrase&ntilde;a es requerida</span>
+                    </div>
+                    </ng-container>
+
+                
+                  <app-f-input-file formControlName="file" [labelTitle]="'Elija su archivo con extensión .key'" [extension]="'.key'"></app-f-input-file>
+                  
+                  <pre>{{CFile.value}}</pre>
+                    <ng-container *ngIf=" (fm.file.dirty || fm.file.touched) && fm.file.errors">
+                       <div class="text-danger">
+                          <span *ngIf="CFile.touched && CFile.hasError('required')" class="text-danger">Archivo es requerido</span>
+                          <span *ngIf="CFile.hasError('extensionNotValid')" class="text-danger">Solo se permiten extensiones .key</span>
+                        </div>
+                    </ng-container>
+                          <br>
+                    <app-f-input-file formControlName="file2" [labelTitle]="'Elija su archivo con extensión .cer'" [extension]="'.cer'"></app-f-input-file>
+                 <ng-container *ngIf=" (fm.file2.dirty || fm.file2.touched) && fm.file2 .errors">
+                    <div class="text-danger">
+                        <span *ngIf="CFile2.touched && CFile2.hasError('required')" class="text-danger">Archivo es requerido</span>
+                        <span *ngIf="CFile2.hasError('extensionNotValid')" class="text-danger">Solo se permiten extensiones .cer</span>
+                      </div>
+                  </ng-container>
+
+                  <button type="submit" mdbBtn color="indigo" mdbWavesEffect size="sm">
+                    Enviar
+                  </button>
+                </form>
+                <!-- Default form login -->
+            </mdb-card-body>
+          </mdb-card>
+    </div>
+</div>

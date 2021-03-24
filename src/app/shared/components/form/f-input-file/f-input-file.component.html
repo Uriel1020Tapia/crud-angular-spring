@@ -1,0 +1,7 @@
+<div class="custom-file">
+    <input type="file"  class="custom-file-input" name="inputFile"  #inputFile  id="inputFile" [accept]="extension"  [disabled]="isDisabled"
+    (change)="onFileChange($event)"
+    (blur)="onTouch()"> 
+    <label #_labelFile class="custom-file-label" for="inputFile">{{labelTitle}}
+    </label>
+</div>

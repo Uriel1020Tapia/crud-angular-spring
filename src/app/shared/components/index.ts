@@ -13,7 +13,7 @@ import { GoogleAutocompleteComponent } from './autocompletes/google-autocomplete
 //DropZone
 import { FDropzoneComponent } from './form/f-dropzone/f-dropzone.component';
 
-
+import { FInputFileComponent } from './form/f-input-file/f-input-file.component';
 
 export const components: any [] =[
    CardUserComponent,
@@ -25,7 +25,8 @@ export const components: any [] =[
    GoogleAutocompleteComponent,
 
    //DropZone
-   FDropzoneComponent
+   FDropzoneComponent,
+   FInputFileComponent
 ];
 
 
@@ -43,3 +44,4 @@ export * from './autocompletes/google-autocomplete/google-autocomplete.component
 //DropZone
 //Autocompletes
 export * from './form/f-dropzone/f-dropzone.component';
+export * from  './form/f-input-file/f-input-file.component';

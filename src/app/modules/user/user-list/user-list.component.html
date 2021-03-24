@@ -27,7 +27,8 @@
           <div class="col-md-6">
             <pre>{{model | json}}</pre>
             <app-f-dropzone [(model)]="model"
-             [maxSize]="9000000"></app-f-dropzone>
+            [allowedFiles]="['image/png','image/jpeg']"
+             [maxSize]="1000000"></app-f-dropzone>
 
           </div>
           <div class="col-md-6">

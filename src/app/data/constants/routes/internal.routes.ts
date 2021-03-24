@@ -7,7 +7,7 @@ export const ROUTES_PATHS = {
     DEFAULT:'panel',
     USER:'user'
   }
-}:
+};
 
 export const INTERNAL_PATHS = {
   /**

@@ -48,7 +48,11 @@ const routes: Routes = [
       }
     ]
   },
-
+  {
+    path:'forms',
+    component: SkeletonComponent,
+    loadChildren: () => import('@modules/forms-reactive/forms-reactive.module').then((m) => m.FormsReactiveModule)
+  },
 
   {path: 'login', component: LoginComponent},
   {path:'employees',component:EmployeeListComponent, canActivate:[EmployeesGuard]},
